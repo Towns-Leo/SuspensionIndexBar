@@ -16,10 +16,11 @@
     <com.mcxtzhang.indexlib.IndexBar.widget.IndexBar
         android:id="@+id/indexBar"
         android:layout_width="24dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
+        android:layout_height="240dp"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginRight="8dp"
         app:indexBarPressBackground="@color/partTranslucent"
-        app:indexBarTextSize="16sp"/>
+        app:indexBarTextSize="10sp"/>
 
     <TextView
         android:id="@+id/tvSideBarHint"

@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
     private static final String TAG = "zxt";
     private RecyclerView mRv;
     private CityAdapter mAdapter;
-    private HeaderRecyclerAndFooterWrapperAdapter mHeaderAdapter;
+//    private HeaderRecyclerAndFooterWrapperAdapter mHeaderAdapter;
     private LinearLayoutManager mManager;
     private List<CityBean> mDatas;
 
@@ -50,16 +50,16 @@ public class MainActivity extends Activity {
         mRv.setLayoutManager(mManager = new LinearLayoutManager(this));
 
         mAdapter = new CityAdapter(this, mDatas);
-        mHeaderAdapter = new HeaderRecyclerAndFooterWrapperAdapter(mAdapter) {
-            @Override
-            protected void onBindHeaderHolder(ViewHolder holder, int headerPos, int layoutId, Object o) {
-                holder.setText(R.id.tvCity, (String) o);
-            }
-        };
-        mHeaderAdapter.setHeaderView(R.layout.item_city, "测试头部");
+//        mHeaderAdapter = new HeaderRecyclerAndFooterWrapperAdapter(mAdapter) {
+//            @Override
+//            protected void onBindHeaderHolder(ViewHolder holder, int headerPos, int layoutId, Object o) {
+//                holder.setText(R.id.tvCity, (String) o);
+//            }
+//        };
+//        mHeaderAdapter.setHeaderView(R.layout.item_city, "测试头部");
 
-        mRv.setAdapter(mHeaderAdapter);
-        mRv.addItemDecoration(mDecoration = new SuspensionDecoration(this, mDatas).setHeaderViewCount(mHeaderAdapter.getHeaderViewCount()));
+        mRv.setAdapter(mAdapter);
+        mRv.addItemDecoration(mDecoration = new SuspensionDecoration(this, mDatas).setHeaderViewCount(0));
 
         //如果add两个，那么按照先后顺序，依次渲染。
         mRv.addItemDecoration(new DividerItemDecoration(MainActivity.this, DividerItemDecoration.VERTICAL_LIST));
@@ -94,11 +94,12 @@ public class MainActivity extends Activity {
                 }
 
                 mIndexBar.setmSourceDatas(mDatas)//设置数据
-                        .setHeaderViewCount(mHeaderAdapter.getHeaderViewCount())//设置HeaderView数量
+                        .setHeaderViewCount(0)//设置HeaderView数量
                         .invalidate();
 
                 mAdapter.setDatas(mDatas);
-                mHeaderAdapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
+//                mHeaderAdapter.notifyDataSetChanged();
                 mDecoration.setmDatas(mDatas);
             }
         }, 200);
@@ -117,6 +118,7 @@ public class MainActivity extends Activity {
         }
         mIndexBar.setmSourceDatas(mDatas)
                 .invalidate();
-        mHeaderAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
+//        mHeaderAdapter.notifyDataSetChanged();
     }
 }
